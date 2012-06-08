@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="jp.ddo.dekuyou.liveview.plugins.smail" android:versionName="2.10" android:versionCode="15">
+
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.RECEIVE_MMS" />
+	<uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_SMS" />
+	<uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
+	<application android:label="@string/app_name"
+		android:description="@string/application_description" android:icon="@drawable/sbmail_liveview"
+		android:debuggable="false">
+
+        
+        
+        <activity android:label="@string/app_name" android:name="com.sonyericsson.extras.liveview.plugins.PluginPreferences" android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+           
+        </activity>
+
+
+
+		<receiver android:name=".SMSReceiver" android:permission="android.permission.BROADCAST_SMS">
+			<intent-filter android:priority="2147483647">
+				<action android:name="android.provider.Telephony.SMS_RECEIVED">
+				</action>
+			</intent-filter>
+
+		</receiver>
+		<receiver android:name=".SMSReceiver"
+			android:permission="android.permission.BROADCAST_WAP_PUSH">
+			<intent-filter android:priority="2147483647">
+				<action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED">
+					<data android:mimeType="application/vnd.wap.mms-message"></data>
+				</action>
+			</intent-filter>
+		</receiver>
+		<receiver android:name=".SMSReceiver">
+			<intent-filter android:priority="2147483647">
+				<action android:name="android.intent.action.PROVIDER_CHANGED">
+					<data android:scheme="content" android:host="gmail-ls"
+						android:path="/unread/^i">
+					</data>
+				</action>
+			</intent-filter>
+			<intent-filter android:priority="2147483647">
+				<action android:name="android.intent.action.CONTENT_CHANGED">
+				</action>
+			</intent-filter>
+
+			<intent-filter android:priority="2147483647">
+				<action android:name="android.provider.Telephony.SMS_REJECTED">
+				</action>
+			</intent-filter>
+			<intent-filter android:priority="2147483647">
+				<action android:name="jp.softbank.mb.mail.transaction.MESSAGE_STATUS_RECEIVED">
+					<data android:mimeType="vnd.android/decore-mail-message"></data>
+				</action>
+			</intent-filter>
+			<intent-filter android:priority="2147483647">
+				<action
+					android:name="com.android.mms.transaction.MessageStatusReceiver.MESSAGE_STATUS_RECEIVED">
+				</action>
+			</intent-filter>
+
+
+
+
+
+		</receiver>
+
+		<service android:label="Smail plugin service"
+			android:name="jp.ddo.dekuyou.liveview.plugins.smail.SmailPluginService">
+			<intent-filter>
+				<action android:name="jp.ddo.dekuyou.liveview.plugins.smail.smailpluginservice" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</service>
+		<activity android:name="com.sonyericsson.extras.liveview.plugins.PluginPreferences"
+			android:label="Smail plugin preferences">
+			<intent-filter>
+				<action android:name="jp.ddo.dekuyou.liveview.plugins.smail.PREFERENCES"></action>
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<receiver android:name="com.sonyericsson.extras.liveview.plugins.PluginReceiver">
+			<intent-filter>
+				<action android:name="com.sonyericsson.extras.liveview.LAUNCH_PLUGIN" />
+			</intent-filter>
+		</receiver>
+
+
+
+        <receiver
+            android:name=".LiveViewSaverReceiver"
+            android:enabled="true">
+            <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+        </receiver>
+
+
+	</application>
+
+	<uses-sdk android:minSdkVersion="7" />
+
+
+
+
+
+
+
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+</manifest>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- 
+    	The following strings needs to be defined in order for the Plugin to function.
+    -->
+    <string name="pluginname">SoftBankメール通知</string>
+    
+    
+    
+<string name="subject">件名</string>
+</resources>

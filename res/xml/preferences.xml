@@ -1,0 +1,9 @@
+<PreferenceScreen	xmlns:android="http://schemas.android.com/apk/res/android" android:order="10" android:title="SoftBankメール通知">
+	
+	<!--
+		Add your additional preferences here.
+	-->
+
+
+
+</PreferenceScreen>
